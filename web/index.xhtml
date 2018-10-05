@@ -30,6 +30,7 @@
                                             value="#{loginBean.password}" requiredMessage="A senha é obrigatoria"/>
 
                                 <p:commandButton value="Login" update="grid" actionListener="#{loginBean.login}"/>
+                                <p:commandButton value="Cadastre-se" update="grid" action="/usuario.xhtml"/>
                             </p:panelGrid>
                         </p:panel>
                     </h:panelGroup>

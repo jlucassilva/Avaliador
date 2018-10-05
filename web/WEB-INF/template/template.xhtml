@@ -10,11 +10,15 @@
 
 <f:view>
     <h:body styleClass="main-body">
+
         <h:outputStylesheet name="login.css" library="css"/>
+        <h:outputStylesheet name="avalia.css" library="css"/>
+
         <h:form prependId="false">
             <p:menubar>
-                <p:menuitem value="Home" url="/home.xhtml"/>
+                <p:menuitem value="Home" url="home.xhtml"/>
                 <p:menuitem value="Competencias" url="competencia.xhtml"/>
+                <p:menuitem value="Vagas" url="vaga.xhtml"/>
                 <f:facet name="options">
                     <p:commandButton value="Logout"
                                      actionListener="#{sessionBean.logout}"

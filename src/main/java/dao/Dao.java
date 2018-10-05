@@ -5,19 +5,19 @@ import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public interface Dao <T>{
+public interface Dao<T> {
 
-    EntityManager getEntityManager();
+	EntityManager getEntityManager();
 
-    Session getSession();
+	Session getSession();
 
-    List<T> listarTodos();
+	List<T> listarTodos();
 
-    void salvar(T entity);
+	T salvar(T entity);
 
-    T atualizar(T entity);
+	T atualizar(T entity);
 
-    T encontraPeloId(T entity);
+	T encontraPeloId(T entity);
 
-    void deletar(Long id);
+	void deletar(Long id);
 }

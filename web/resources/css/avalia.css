@@ -1,0 +1,17 @@
+.texto-opaco {
+    opacity: 1.0 !important;
+}
+
+.ui-tooltip .ui-tooltip-text {
+    color: #fff;
+    background-color: #ef5350;
+    border-color: #ef5350;
+}
+
+.junto{
+    display: inline-block;!important;
+}
+
+/*#competencias{*/
+    /*height: 28px;*/
+/*}*/

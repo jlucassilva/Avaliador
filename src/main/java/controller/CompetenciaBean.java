@@ -2,6 +2,7 @@ package controller;
 
 import model.Competencia;
 import service.CompetenciaService;
+import service.VagaService;
 import service.exception.ServiceException;
 import util.MessageUtil;
 import util.Util;
@@ -18,10 +19,16 @@ import java.util.List;
 public class CompetenciaBean implements Serializable {
     private static final long serialVersionUID = -1696903758790487986L;
 
+
+//    @Inject
+//    private VagaService service;
+
     @Inject
     private CompetenciaService service;
 
-    private List<Competencia> competencias;
+
+
+	private List<Competencia> competencias;
 
     private Competencia competencia;
 
@@ -96,4 +103,6 @@ public class CompetenciaBean implements Serializable {
     public void setTituloModal(String tituloModal) {
         this.tituloModal = tituloModal;
     }
+
+//	private String
 }

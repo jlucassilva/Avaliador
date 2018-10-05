@@ -1,0 +1,77 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="conteudo">
+        <h:form id="form">
+            <div class="ui-g">
+                <div class="ui-g-1"></div>
+                <div class="ui-g-10">
+                    <h:panelGroup id="panel-geral">
+                        <p:panel id="panel" header="Vagas" styleClass="card">
+                            <p:dataTable id="tabela" value="#{avaliacaoBean.avaliacoes}"
+                                         var="avaliacao" widgetVar="tableVaga" lazy="false"
+                                         filterBy="#{avaliacao.descricao}"
+                                         selectionMode="single" filteredValue="#{avaliacaoBean.avaliacoesFiltradas}"
+                                         rowKey="#{avaliacao}" rowIndexVar="rowIndex"
+                                         paginator="true" paginatorPosition="bottom" rows="5"
+                                         emptyMessage="Nada cadastrado.">
+
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <h:outputText value="Busca por texto: "/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('tableVaga').filter()"
+                                                     style="width:150px" placeholder="qualquer coisa"/>
+                                    </p:outputPanel>
+                                </f:facet>
+
+                                <p:column headerText="Descrição" width="auto" styleClass="centralizado"
+                                          filterBy="#{avaliacao.vaga.titulo}" filterMatchMode="contains"
+                                          filterStyle="display:none">
+                                    <h:outputText escape="false" value="#{avaliacao.vaga.titulo}"/>
+                                </p:column>
+
+                                <p:column headerText="Avalia pls" styleClass="centralizado">
+                                    <p:rating cancel="false" value="#{avaliacao.notaInt}">
+                                        <p:ajax event="rate" listener="#{avaliacaoBean.avaliando(avaliacao)}"/>
+                                    </p:rating>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:panelGroup>
+                </div>
+                <div class="ui-g-1"></div>
+                <div class="ui-g-1"></div>
+                <div class="ui-g-10">
+                    <h:panelGroup id="panel-recomendado">
+                        <p:panel id="recomendado" header="Vagas Recomendadas" styleClass="card">
+                            <p:dataTable id="tabela-recomendado" value="#{avaliacaoBean.vagasRecomendadas}"
+                                         var="recomendacao" widgetVar="tableVagaRecomendada"
+                                         selectionMode="single"
+                                         rowKey="#{recomendacao}" rowIndexVar="rowIndex"
+                                         paginator="true" paginatorPosition="bottom" rows="3"
+                                         emptyMessage="Nada cadastrado.">
+
+                                <p:column headerText="Descrição" width="auto" styleClass="centralizado">
+                                    <h:outputText escape="false" value="#{recomendacao.id}"/>
+                                </p:column>
+
+                                <p:column headerText="Descrição" width="auto" styleClass="centralizado">
+                                    <h:outputText escape="false" value="#{recomendacao.titulo}"/>
+                                </p:column>
+
+                                <p:column headerText="Descrição" width="auto" styleClass="centralizado">
+                                    <h:outputText escape="false" value="#{recomendacao.salario}"/>
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:panel>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

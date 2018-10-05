@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    </f:facet>
+    <title><ui:insert name="title">Good Vagas</ui:insert></title>
+    <h:outputScript library="omega-layout" name="js/nanoscroller.js"/>
+    <h:outputScript library="omega-layout" name="js/layout.js"/>
+    <ui:insert name="head"/>
+</h:head>
+<h:body class="main-body">
+    <h:outputStylesheet library="omega-layout" name="css/animate.css"/>
+    <h:outputStylesheet library="omega-layout" name="css/nanoscroller.css"/>
+    <h:outputStylesheet library="omega-layout" name="css/layout.css"/>
+    <h:outputStylesheet library="css" name="avalia.css"/>
+
+    <div class="wrapper">
+        <ui:insert name="topbar">
+            <ui:include src="topbar.xhtml"/>
+        </ui:insert>
+
+        <ui:insert name="sidebar">
+            <ui:include src="sidebar.xhtml"/>
+        </ui:insert>
+
+        <div class="main">
+            <ui:insert name="content"/>
+        </div>
+
+        <ui:insert name="footer">
+            <ui:include src="footer.xhtml"/>
+        </ui:insert>
+    </div>
+
+    <ui:insert name="widgets">
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+            <f:facet name="start">
+                <p:graphicImage value="#{resource['omega-layout:images/preloader.gif']}"/>
+            </f:facet>
+            <f:facet name="complete">
+                <h:outputText value=""/>
+            </f:facet>
+        </p:ajaxStatus>
+    </ui:insert>
+</h:body>
+</html>

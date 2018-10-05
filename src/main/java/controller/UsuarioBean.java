@@ -1,70 +1,138 @@
 package controller;
 
+import model.Anunciante;
+import model.Candidato;
+import model.Competencia;
 import model.Usuario;
-import service.exception.ServiceException;
+import service.AnuncianteService;
+import service.CandidatoService;
+import service.CompetenciaService;
 import service.UsuarioService;
+import service.exception.ServiceException;
+import util.Util;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
 public class UsuarioBean implements Serializable {
-    private static final long serialVersionUID = 6658896176906049876L;
+	private static final long serialVersionUID = 6658896176906049876L;
 
-    @Inject
-    private UsuarioService usuarioService;
+	@Inject
+	private UsuarioService usuarioService;
+	@Inject
+	private CandidatoService candidatoService;
+	@Inject
+	private CompetenciaService competenciaService;
+	@Inject
+	private AnuncianteService anuncianteService;
 
-    private Usuario usuarioSelecionado;
-    private String name;
-    private String test;
-    private List<Usuario> usuarios;
+	private Usuario usuarioSelecionado;
+	private List<Usuario> usuarios;
+	private List<Competencia> competencias;
+	private List<Competencia> competenciasSelecionadas;
 
-    @PostConstruct
-    public void init() {
-        usuarios = new ArrayList<>();
-        usuarioSelecionado = new Usuario();
-    }
+	private Boolean anunciante = false;
 
-    private void carregarUsuario() throws ServiceException {
-        usuarios = usuarioService.listarTodos();
-    }
+	@PostConstruct
+	public void init() {
+		usuarios = new ArrayList<>();
+		usuarioSelecionado = new Usuario();
+		atualizarCompetencias();
+	}
 
-    public void salvarOuAtualizar() {
-        try {
-            usuarioService.salvar(usuarioSelecionado);
-            carregarUsuario();
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
+	private void atualizarCompetencias() {
+		competencias = competenciaService.listarTodos();
+		competenciasSelecionadas = new ArrayList<>();
+		if (competencias != null && !competencias.isEmpty())
+			competenciasSelecionadas.add(competencias.get(new Random().nextInt(competencias.size())));
+	}
 
-    public Usuario getUsuarioSelecionado() {
-        return usuarioSelecionado;
-    }
+	public void salvarOuAtualizar() {
+		try {
+			if (anunciante) {
+				usuarioSelecionado.setCandidato(null);
+				Anunciante anunciante = new Anunciante(usuarioSelecionado.getNome(), usuarioSelecionado);
+				anuncianteService.salvar(anunciante);
+			} else {
+				Candidato candidato = new Candidato();
+				candidato.setNome(usuarioSelecionado.getNome());
+				candidato.setUsuario(usuarioSelecionado);
+				candidato.setCompetencias(competenciasSelecionadas);
+				usuarioSelecionado.setCandidato(null);
 
-    public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
-        this.usuarioSelecionado = usuarioSelecionado;
-    }
+				candidatoService.salvar(candidato);
+			}
 
-    public String getName() {
-        return name;
-    }
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
 
-    public void setName(String name) {
-        this.name = name;
-    }
+		} catch (ServiceException | IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public String getTest() {
-        return test;
-    }
+	public List<Competencia> completaCompetencias(String descricao) {
+		return competencias.stream()
+				.filter(competencia -> {
+					List<Competencia> c = new ArrayList<>();
+					if (usuarioSelecionado.getCandidato() != null && usuarioSelecionado.getCandidato().getCompetencias() != null)
+						c = usuarioSelecionado.getCandidato().getCompetencias();
+					return competencia.getDescricao().toLowerCase().contains(descricao.toLowerCase())
+							&& !c.contains(competencia);
+				})
+				.collect(Collectors.toList());
+	}
 
-    public void setTest(String test) {
-        this.test = test;
-    }
+
+	public Usuario getUsuarioSelecionado() {
+		return usuarioSelecionado;
+	}
+
+	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
+		this.usuarioSelecionado = usuarioSelecionado;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public List<Competencia> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(List<Competencia> competencias) {
+		this.competencias = competencias;
+	}
+
+	public Boolean getAnunciante() {
+		return anunciante;
+	}
+
+	public void setAnunciante(Boolean anunciante) {
+		this.anunciante = anunciante;
+	}
+
+	public List<Competencia> getCompetenciasSelecionadas() {
+		return competenciasSelecionadas;
+	}
+
+	public void setCompetenciasSelecionadas(List<Competencia> competenciasSelecionadas) {
+		this.competenciasSelecionadas = competenciasSelecionadas;
+	}
 }

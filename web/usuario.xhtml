@@ -1,31 +1,95 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+    </f:facet>
+    <title>Good Vagas</title>
+</h:head>
+<h:body class="login-body">
+    <h:outputStylesheet library="omega-layout" name="css/layout.css"/>
+    <h:outputStylesheet library="css" name="avalia.css"/>
 
-<h:head></h:head>
-<h:body styleClass="main-body">
-    <h:outputStylesheet name="login.css" library="css"/>
+    <h:form id="form" prependId="false" onkeypress="if (event.keyCode === 13) {return false; }">
+        <div id="login-wrapper" style="width:500px;">
 
-    <h:form prependId="false">
-        <h:panelGroup id="panel-geral-cliente" style="margin: 0 auto;" styleClass="ui-g-4  ">
-            <p:panel id="panel-cliente" header="Login" styleClass="card ">
-                <p:panelGrid id="grid" styleClass="ui-noborder" columns="1">
-                    <p:outputLabel for="login" value="Email ou Usuario"/>
-                    <p:inputText id="login" style="width:350px" value="#{usuarioBean.usuarioSelecionado.username}"/>
+            <p:tooltip/>
+            <div id="login-container" style="height: 420px !important;">
+                <span class="title">Cadastro de Usuario</span>
 
-                    <p:outputLabel for="password" value="Senha"/>
-                    <p:password id="password" style="width:350px" inline="true"
-                                value="#{usuarioBean.usuarioSelecionado.password}"/>
+                <div class="ui-g ui-fluid">
 
-                    <p:commandButton value="Login" actionListener="#{usuarioBean.salvarOuAtualizar}"/>
-                </p:panelGrid>
-            </p:panel>
-        </h:panelGroup>
+                    <div class="ui-g-10">
+                        <p:selectOneButton value="#{usuarioBean.anunciante}"
+                                           required="true" requiredMessage="Escolha uma opção">
+                            <f:selectItem itemLabel="Candidato" itemValue="false"/>
+                            <f:selectItem itemLabel="Anunciante" itemValue="true"/>
+                            <f:ajax event="change" render="competencias"/>
+                        </p:selectOneButton>
+                    </div>
+
+                    <div class="ui-g-9">
+                        <p:inputText id="nomeDeUsuario" placeholder="Nome de usuario"
+                                     value="#{usuarioBean.usuarioSelecionado.username}"
+                                     required="true" requiredMessage="Digite um nome de usuario!"/>
+                        <p:message for="nomeDeUsuario" display="tooltip"/>
+
+                    </div>
+                    <div class="ui-g-9">
+                        <p:password id="senha" placeholder="Senha"
+                                    required="true" requiredMessage="Digite uma senha!"
+                                    value="#{usuarioBean.usuarioSelecionado.password}"/>
+                        <p:message for="senha" display="tooltip"/>
+                    </div>
+
+                    <div class="ui-g-9">
+                        <p:inputText id="nome" placeholder="Nome Sobrenome"
+                                     required="true" requiredMessage="Digite seu nome."
+                                     value="#{usuarioBean.usuarioSelecionado.nome}"/>
+                        <p:message for="nome" display="tooltip"/>
+                    </div>
+
+
+                    <div class="ui-g-9">
+                        <p:autoComplete id="competencias" multiple="true" placeholder="Competencias"
+                                        value="#{usuarioBean.competenciasSelecionadas}"
+                                        label="#{usuarioBean.competenciasSelecionadas}"
+                                        completeMethod="#{usuarioBean.completaCompetencias}"
+                                        var="comp" itemLabel="#{comp}" itemValue="#{comp}"
+                                        disabled="#{usuarioBean.anunciante}"
+                                        forceSelection="true">
+                            <p:ajax event="itemSelect"/>
+                            <p:ajax event="itemUnselect"/>
+                            <o:converter converterId="omnifaces.ListIndexConverter"
+                                         list="#{usuarioBean.competencias}"/>
+                            <p:column>
+                                <h:outputText value="#{comp.descricao}"/>
+                            </p:column>
+                        </p:autoComplete>
+                    </div>
+
+                    <div class="ui-g-12"></div>
+                    <div class="ui-g-12"></div>
+                    <div class="ui-g-6">
+                        <p:commandButton update="form" value="Cadastrar"
+                                         actionListener="#{usuarioBean.salvarOuAtualizar}"/>
+                    </div>
+                    <div class="ui-g-6">
+                        <p:button outcome="login.xhtml" value="Cancelar"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-footer">PrimeFaces Omega</div>
+        </div>
     </h:form>
 </h:body>
-
 </html>

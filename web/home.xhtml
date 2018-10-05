@@ -1,12 +1,60 @@
-<ui:composition template="/WEB-INF/template/template.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="topbar-title">Minhas vagas</ui:define>
 
-    <ui:define name="conteudo">
+    <ui:define name="content">
         <h:form id="form">
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card">
+                            <h1>Principal</h1>
+                            <p:dataTable id="tabela" value="#{avaliacaoBean.avaliacoes}"
+                                         var="avaliacao" widgetVar="tableVaga" lazy="false"
+                                         filterBy="#{avaliacao.descricao}"
+                                         filteredValue="#{avaliacaoBean.avaliacoesFiltradas}"
+                                         rowKey="#{avaliacao}" rowIndexVar="rowIndex"
+                                         paginator="true" paginatorPosition="bottom" rows="5"
+                                         emptyMessage="Nada cadastrado.">
+
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <h:outputText value="Busca por texto: "/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('tableVaga').filter()"
+                                                     style="width:150px" placeholder="qualquer coisa"/>
+                                    </p:outputPanel>
+                                </f:facet>
+
+                                <p:column width="auto" styleClass="centralizado"
+                                          filterBy="#{avaliacao.vaga.descricao}" filterMatchMode="contains"
+                                          filterStyle="display:none">
+                                    <p:fieldset legend="#{avaliacao.vaga.titulo}"
+                                                toggleable="true" toggleSpeed="500">
+                                        <p:inputTextarea readonly="true" rows="10" cols="40" id="dsce"
+                                                         autoResize="false"
+                                                         value="#{avaliacao.vaga.descricao}"/>
+
+
+                                        <p:rating style="width: 84px!important;" styleClass="junto" cancel="false"
+                                                  value="#{avaliacao.notaInt}">
+                                            <p:ajax event="rate" listener="#{avaliacaoBean.avaliando(avaliacao)}"/>
+                                        </p:rating>
+                                        <h:outputLabel rendered="#{avaliacao.recomendada eq true}">
+                                            <i style="color:green"
+                                               class="junto fa fa-check-circle fa-lg"/>
+                                        </h:outputLabel>
+                                    </p:fieldset>
+                                </p:column>
+
+                            </p:dataTable>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

@@ -1,0 +1,95 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="topbar-title">Vagas</ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card">
+                            <h1>Vaga</h1>
+                            <p:dataTable id="tabela" value="#{vagaBean.vagas}"
+                                         var="vaga" widgetVar="tableVaga" lazy="false" filterBy="#{vaga.descricao}"
+                                         filteredValue="#{vagaBean.vagaFiltrada}"
+                                         rowKey="#{vaga}" rowIndexVar="rowIndex"
+                                         paginator="true" paginatorPosition="bottom" rows="5"
+                                         emptyMessage="Nada cadastrado.">
+
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <h:outputText value="Search all fields:"/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('tableVaga').filter()"
+                                                     style="width:150px;" placeholder="Enter keyword"/>
+                                    </p:outputPanel>
+                                </f:facet>
+                                
+                                <p:column headerText="Descricao" filterBy="#{vaga.descricao}"
+                                          filterStyle="display: none">
+                                    <p:inputTextarea readonly="true" rows="10" cols="40" id="dsce"
+                                                     styleClass="input form-control"
+                                                     style="width: 750px;" autoResize="false"
+                                                     value="#{vaga.descricao}"/>
+                                </p:column>
+
+                                <p:column width="50" headerText="Ações">
+                                    <p:commandLink id="btn-atualizar" styleClass="editor-parametro"
+                                                   title="Atualizar Competencia" update="dialog"
+                                                   action="#{vagaBean.iniciaAtualizacao(vaga)}">
+                                        <i class="fa fa-pencil"/>Editar
+                                        <f:setPropertyActionListener value="#{vaga}"
+                                                                     target="#{vagaBean.vaga}"/>
+                                    </p:commandLink>
+
+                                </p:column>
+
+
+                            </p:dataTable>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+        <!-- Dialog de Cadastro e Alteração -->
+        <h:form id="form-dialog" prependId="false">
+            <p:dialog id="dialog" widgetVar="dialog" height="450"
+                      header="#{vagaBean.tituloModal}" style="width: 500px;"
+                      closable="false" modal="true" resizable="false">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="titulo"
+                                   value="Titulo: "/>
+                    <p:inputText id="titulo" styleClass="input form-control" style="width: 250px;"
+                                 value="#{vagaBean.vaga.titulo}"/>
+
+                    <h:outputLabel for="desc"
+                                   value="Descrição: "/>
+                    <p:inputTextarea rows="10" cols="40" id="desc" styleClass="input form-control"
+                                     style="width: 750px;" scrollHeight="200"
+                                     value="#{vagaBean.vaga.descricao}"/>
+
+                    <h:outputLabel for="sal"
+                                   value="Salario: "/>
+                    <p:inputNumber id="sal" styleClass="input form-control" style="width: 250px;"
+                                   value="#{vagaBean.vaga.salario}" decimalSeparator="," thousandSeparator="."/>
+                </h:panelGrid>
+                <f:facet name="footer">
+                    <p:commandButton value="Salvar"
+                                     actionListener="#{vagaBean.salvar}"
+                                     update="form:tabela"/>
+
+                    <p:commandButton value="Cancelar"
+                                     oncomplete="PF('dialog').hide();" update="form:tabela"/>
+
+                </f:facet>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

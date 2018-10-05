@@ -9,63 +9,66 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 public abstract class AbstractDao<T> implements Dao<T> {
-    private final Class<T> entity;
+	private final Class<T> entity;
 
-    @Inject
-    private EntityManager manager;
+	@Inject
+	private EntityManager manager;
 
-    @SuppressWarnings("unchecked")
-    public AbstractDao() {
-        Class<T> genericClass = (Class<T>) getClass().getGenericSuperclass();
-        ParameterizedType parameterized = (ParameterizedType) genericClass.getGenericSuperclass();
-        entity = (Class<T>) parameterized.getActualTypeArguments()[0];
-    }
+	@SuppressWarnings("unchecked")
+	public AbstractDao() {
+		Class<T> genericClass = (Class<T>) getClass().getGenericSuperclass();
+		ParameterizedType parameterized = (ParameterizedType) genericClass.getGenericSuperclass();
+		entity = (Class<T>) parameterized.getActualTypeArguments()[0];
+	}
 
-    public AbstractDao(final Class<T> persistentClass) {
-        super();
-        this.entity = persistentClass;
-    }
+	public AbstractDao(final Class<T> persistentClass) {
+		super();
+		this.entity = persistentClass;
+	}
 
-    protected Class<T> getEntity() {
-        return entity;
-    }
+	protected Class<T> getEntity() {
+		return entity;
+	}
 
-    @Override
-    public EntityManager getEntityManager() {
-        return this.manager;
-    }
+	@Override
+	public EntityManager getEntityManager() {
+		return this.manager;
+	}
 
-    @Override
-    public Session getSession() {
-        return (Session) manager.getDelegate();
-    }
+	@Override
+	public Session getSession() {
+		return (Session) manager.getDelegate();
+	}
 
-    @Override
-    public List<T> listarTodos() {
-        return manager.createQuery("from " + entity.getSimpleName(), entity)
-                .getResultList();
-    }
+	@Override
+	public List<T> listarTodos() {
+		return manager.createQuery("from " + entity.getSimpleName(), entity)
+				.getResultList();
+	}
 
-    @Override
-    @Transactional
-    public void salvar(T entity) {
-        manager.persist(entity);
-    }
+	@Override
+	@Transactional
+	public T salvar(T entity) {
+		manager.persist(entity);
+		entity = manager.merge(entity);
 
-    @Override
-    @Transactional
-    public T atualizar(T entity) {
-        return manager.merge(entity);
-    }
+		return entity;
+	}
 
-    @Override
-    @Transactional
-    public T encontraPeloId(T entity) {
-        return manager.find(this.entity, entity);
-    }
+	@Override
+	@Transactional
+	public T atualizar(T entity) {
+		return manager.merge(entity);
+	}
 
-    @Override
-    public void deletar(Long id) {
-        manager.remove(id);
-    }
+	@Override
+	@Transactional
+	public T encontraPeloId(T entity) {
+		return manager.find(this.entity, entity);
+	}
+
+	@Override
+	public void deletar(Long id) {
+		manager.remove(id);
+	}
 }

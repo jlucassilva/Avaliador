@@ -1,52 +1,55 @@
-<ui:composition template="/WEB-INF/template/template.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="topbar-title">Competencias</ui:define>
 
-    <ui:define name="conteudo">
+    <ui:define name="content">
         <h:form id="form">
-            <h:panelGroup id="panel-geral">
-                <p:panel id="panel" header="Competencia" styleClass="card">
-                    <p:dataTable id="tabela" value="#{competenciaBean.competencias}"
-                                 var="comp"
-                                 selectionMode="single"
-                                 rowKey="#{comp}" rowIndexVar="rowIndex"
-                                 paginator="true" paginatorPosition="bottom" rows="5"
-                                 emptyMessage="Nada cadastrado.">
 
-                        <f:facet name="header">
-                            <p:commandButton icon="fa fa-plus" id="btn-adicionar"
-                                             value="Adicionar competencia" update="dialog"
-                                             styleClass="botao"
-                                             action="#{competenciaBean.iniciaCadastro}"
-                                             oncomplete="PF('dialog').show();" style="float:left">
-                            </p:commandButton>
-                            <p:inputText disabled="true"/>
-                        </f:facet>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card">
+                        <h1>Competencias</h1>
+                        <p:dataTable id="tabela" value="#{competenciaBean.competencias}"
+                                     var="comp"
+                                     selectionMode="single"
+                                     rowKey="#{comp}" rowIndexVar="rowIndex"
+                                     paginator="true" paginatorPosition="bottom" rows="5"
+                                     emptyMessage="Nada cadastrado.">
 
-                        <p:column headerText="Descrição" width="auto" styleClass="centralizado">
-                            <h:outputText value="#{comp.descricao}"/>
-                        </p:column>
+                            <f:facet name="header">
+                                <p:commandButton icon="fa fa-plus" id="btn-adicionar"
+                                                 value="Adicionar competencia" update="dialog"
+                                                 styleClass="botao"
+                                                 action="#{loginBean.teste}"
+                                                 oncomplete="PF('dialog').show();" style="float:left">
+                                </p:commandButton>
+                                <p:inputText disabled="true"/>
+                            </f:facet>
 
-                        <p:column width="50" headerText="Ações">
-                            <p:commandLink id="btn-atualizar" styleClass="editor-parametro"
-                                           title="Atualizar Competencia" update="dialog"
-                                           action="#{competenciaBean.iniciaAtualizacao}"
-                                           oncomplete="PF('dialog').show();">
-                                <i class="fa fa-pencil"/>Editar
-                                <f:setPropertyActionListener value="#{comp}"
-                                                             target="#{competenciaBean.competencia}"/>
-                            </p:commandLink>
+                            <p:column headerText="Descrição" width="auto" styleClass="centralizado">
+                                <h:outputText value="#{comp.descricao}"/>
+                            </p:column>
 
-                        </p:column>
-                    </p:dataTable>
-                </p:panel>
-            </h:panelGroup>
+                            <p:column width="50" headerText="Ações">
+                                <p:commandLink id="btn-atualizar" styleClass="editor-parametro"
+                                               title="Atualizar Competencia" update="dialog"
+                                               action="#{competenciaBean.iniciaAtualizacao}"
+                                               oncomplete="PF('dialog').show();">
+                                    <i class="fa fa-pencil"/>Editar
+                                    <f:setPropertyActionListener value="#{comp}"
+                                                                 target="#{competenciaBean.competencia}"/>
+                                </p:commandLink>
+
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </div>
+            </div>
         </h:form>
-
-        <!-- Dialog de Cadastro e Alteração -->
         <h:form id="form-dialog" prependId="false">
             <p:dialog id="dialog" widgetVar="dialog"
                       header="#{competenciaBean.tituloModal}"
@@ -55,7 +58,8 @@
                     <h:outputLabel for="desc" style="font-size: 14px!important; font-weight: bold;"
                                    value="Descrição: "/>
                     <p:inputText id="desc" styleClass="input form-control" style="width: 250px;"
-                                 value="#{competenciaBean.competencia.descricao}"/>
+                                 value="#{competenciaBean.competencia.descricao}" required="true"
+                    requiredMessage="Digite algo"/>
                 </h:panelGrid>
                 <f:facet name="footer">
                     <p:commandButton value="Salvar" style="float:right; margin-right: 10px; margin-bottom: 10px;"
@@ -68,15 +72,6 @@
                 </f:facet>
             </p:dialog>
         </h:form>
+
     </ui:define>
 </ui:composition>
-
-        <!--<p:commandLink styleClass="lixo-parametro"-->
-        <!--action="#{competenciaBean.excluir}"-->
-        <!--update="form">-->
-        <!--<i class="fa fa-trash"/>DEL-->
-        <!--<p:confirm header="Confirmação" message="Deseja excluir a Competencia?"-->
-        <!--icon="fa fa-exclamation-triangle"/>-->
-        <!--<f:setPropertyActionListener value="#{comp}"-->
-        <!--target="#{competenciaBean.competencia}"/>-->
-        <!--</p:commandLink>-->

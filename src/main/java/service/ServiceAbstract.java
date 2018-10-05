@@ -20,8 +20,8 @@ public class ServiceAbstract<T> implements Service<T> {
     }
 
     @Override
-    public void salvar(T entity) throws ServiceException {
-        dao.salvar(entity);
+    public T salvar(T entity) throws ServiceException {
+       return (T) dao.salvar(entity);
     }
 
     @Override

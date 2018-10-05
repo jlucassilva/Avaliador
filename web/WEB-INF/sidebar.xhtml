@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:po="http://primefaces.org/omega">
+
+    <h:form prependId="false">
+        <div class="sidebar">
+            <div class="nano">
+                <div class="nano-content sidebar-scroll-content">
+                    <div class="logo">
+                        <p:graphicImage value="#{resource['images/logogv.png']}" width="177"/>
+                    </div>
+
+                    <div class="profile">
+                        <p:graphicImage url="#{sessionBean.profilePicture()}"/>
+                        <a id="profile-button" href="#">
+                            <span class="username"><h:outputText value="#{sessionBean.usuarioLogado.nome}"/></span>
+                            <i class="fa fa-fw fa-cog"/>
+                        </a>
+                        <ul>
+                            <li>
+                                <h:commandLink actionListener="#{sessionBean.logout}">
+                                    <i class="fa fa-fw fa-sign-out"/>
+                                    <span>Logout</span>
+                                </h:commandLink>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="menu">
+                        <h:form id="menuform">
+                            <po:menu>
+                                <p:menuitem rendered="#{sessionBean.usuarioLogado.candidato ne null}" id="principal"
+                                            outcome="/home.xhtml" icon="fa fa-home fa-fw" value="Principal"/>
+                                <p:menuitem rendered="#{sessionBean.usuarioLogado.anunciante ne null}" id="vagas"
+                                            outcome="/vaga.xhtml" icon="fa fa-home fa-fw" value="Vagas"/>
+                                <p:menuitem id="competencia" outcome="/competencia.xhtml" icon="fa fa-home fa-fw"
+                                            value="Competencia"/>
+                            </po:menu>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

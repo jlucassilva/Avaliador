@@ -1,42 +1,63 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
-public class Anunciante {
-    private Long id;
-    private String nome;
-    private String cidade;
-    private List<Vaga> vagas;
+@Entity
+public class Anunciante implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	private Long id;
+	private String nome;
+	@Transient
+	private String cidade;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private Usuario usuario;
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Vaga> vagas;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Anunciante() {
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public Anunciante(String nome, Usuario usuario) {
+		this.nome = nome;
+		this.usuario = usuario;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getCidade() {
-        return cidade;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public List<Vaga> getVagas() {
-        return vagas;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setVagas(List<Vaga> vagas) {
-        this.vagas = vagas;
-    }
+	public List<Vaga> getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(List<Vaga> vagas) {
+		this.vagas = vagas;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }
