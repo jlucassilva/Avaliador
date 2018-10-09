@@ -1,10 +1,10 @@
 package controller;
 
+import kontroller.Usuario;
 import model.Anunciante;
 import model.Candidato;
 import model.Competencia;
-import model.Usuario;
-import service.AnuncianteService;
+ import service.AnuncianteService;
 import service.CandidatoService;
 import service.CompetenciaService;
 import service.UsuarioService;

@@ -1,5 +1,6 @@
 package model;
 
+import kontroller.Usuario;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,6 +9,8 @@ import java.util.List;
 
 @Entity
 public class Anunciante implements Serializable {
+	private static final long serialVersionUID = 3943662055685412967L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")

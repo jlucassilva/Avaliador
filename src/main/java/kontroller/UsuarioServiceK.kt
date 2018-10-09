@@ -1,6 +1,5 @@
 package kontroller
 
-import model.Usuario
 import java.io.Serializable
 import javax.inject.Inject
 

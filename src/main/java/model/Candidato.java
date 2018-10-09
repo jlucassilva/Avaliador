@@ -1,5 +1,6 @@
 package model;
 
+import kontroller.Usuario;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;

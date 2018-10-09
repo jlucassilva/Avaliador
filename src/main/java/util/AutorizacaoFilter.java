@@ -1,12 +1,11 @@
 package util;
 
-import model.Usuario;
-import org.omnifaces.filter.HttpFilter;
+ import kontroller.Usuario;
+ import org.omnifaces.filter.HttpFilter;
 import org.omnifaces.util.Servlets;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

@@ -1,6 +1,6 @@
 package controller;
 
-import model.Usuario;
+import kontroller.Usuario;
 import service.UsuarioService;
 import util.MessageUtil;
 

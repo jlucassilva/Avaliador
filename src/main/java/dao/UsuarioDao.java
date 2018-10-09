@@ -1,9 +1,6 @@
 package dao;
 
-
-
-import model.Usuario;
-
+import kontroller.Usuario;
 import java.io.Serializable;
 
 public class UsuarioDao extends AbstractDao<Usuario> implements Serializable {

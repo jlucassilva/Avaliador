@@ -1,12 +1,9 @@
 package controller;
 
-import model.Competencia;
-import model.Usuario;
-import model.Vaga;
+import kontroller.Usuario;
 import service.CompetenciaService;
 import service.UsuarioService;
 import service.VagaService;
-import service.exception.ServiceException;
 import util.MessageUtil;
 
 import javax.faces.context.ExternalContext;
@@ -16,9 +13,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @ViewScoped

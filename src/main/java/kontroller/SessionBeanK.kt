@@ -1,7 +1,6 @@
 package kontroller
 
-import model.Usuario
-import java.io.IOException
+ import java.io.IOException
 import java.io.Serializable
 import java.util.*
 import javax.annotation.PostConstruct

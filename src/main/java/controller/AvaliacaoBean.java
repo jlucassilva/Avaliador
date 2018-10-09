@@ -4,10 +4,7 @@ package controller;
 import intelligence.RankPorVaga;
 import model.Avaliacao;
 import model.Candidato;
-import model.Usuario;
 import model.Vaga;
-import org.hsqldb.lib.Collection;
-import org.primefaces.event.RateEvent;
 import service.AvaliacaoService;
 import service.CandidatoService;
 import service.UsuarioService;
@@ -22,7 +19,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Named

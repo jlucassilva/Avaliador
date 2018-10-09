@@ -1,9 +1,7 @@
 package dao;
 
-import model.Avaliacao;
-import model.Candidato;
-import model.Usuario;
-import model.Vaga;
+ import model.Candidato;
+ import model.Vaga;
 
 import java.io.Serializable;
 import java.util.List;

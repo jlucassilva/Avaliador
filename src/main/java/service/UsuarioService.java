@@ -1,7 +1,7 @@
 package service;
 
 import dao.UsuarioDao;
-import model.Usuario;
+import kontroller.Usuario;
 import service.exception.ServiceException;
 
 import javax.inject.Inject;
