@@ -1,5 +1,6 @@
-package kontroller
+package dao
 
+ import model.Usuario
  import java.io.Serializable
 
 open class UsuarioDaoK: AbstractDaoK<Usuario>(Usuario::class.java),Serializable {

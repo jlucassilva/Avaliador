@@ -1,6 +1,6 @@
 package util;
 
- import kontroller.Usuario;
+ import model.Usuario;
  import org.omnifaces.filter.HttpFilter;
 import org.omnifaces.util.Servlets;
 

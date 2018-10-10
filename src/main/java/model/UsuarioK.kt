@@ -1,7 +1,5 @@
-package kontroller
+package model
 
-import model.Anunciante
-import model.Candidato
 import org.hibernate.annotations.GenericGenerator
 import java.io.Serializable
 import javax.persistence.*

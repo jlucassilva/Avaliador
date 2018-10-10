@@ -1,15 +1,14 @@
 package controller;
 
-import kontroller.Usuario;
 import model.Anunciante;
 import model.Candidato;
 import model.Competencia;
- import service.AnuncianteService;
-import service.CandidatoService;
-import service.CompetenciaService;
-import service.UsuarioService;
+import model.Usuario;
+import service.AnuncianteServiceK;
+import service.CandidatoServiceK;
+import service.CompetenciaServiceK;
+import service.UsuarioServiceK;
 import service.exception.ServiceException;
-import util.Util;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
@@ -30,13 +29,13 @@ public class UsuarioBean implements Serializable {
 	private static final long serialVersionUID = 6658896176906049876L;
 
 	@Inject
-	private UsuarioService usuarioService;
+	private UsuarioServiceK usuarioService;
 	@Inject
-	private CandidatoService candidatoService;
+	private CandidatoServiceK candidatoService;
 	@Inject
-	private CompetenciaService competenciaService;
+	private CompetenciaServiceK competenciaService;
 	@Inject
-	private AnuncianteService anuncianteService;
+	private AnuncianteServiceK anuncianteService;
 
 	private Usuario usuarioSelecionado;
 	private List<Usuario> usuarios;

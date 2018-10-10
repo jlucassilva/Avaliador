@@ -1,5 +1,6 @@
-package kontroller
+package service
 
+import dao.DaoK
 import service.exception.ServiceException
 
 abstract class ServiceAbstractK<T>(var dao: DaoK<T>) : ServiceK<T> {
@@ -27,6 +28,4 @@ abstract class ServiceAbstractK<T>(var dao: DaoK<T>) : ServiceK<T> {
     override fun deletar(id: Long?) {
         dao.deletar(id)
     }
-
-
 }

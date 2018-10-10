@@ -5,10 +5,10 @@ import intelligence.RankPorVaga;
 import model.Avaliacao;
 import model.Candidato;
 import model.Vaga;
-import service.AvaliacaoService;
-import service.CandidatoService;
-import service.UsuarioService;
-import service.VagaService;
+import service.AvaliacaoServiceK;
+import service.CandidatoServiceK;
+import service.UsuarioServiceK;
+import service.VagaServiceK;
 import service.exception.ServiceException;
 
 import javax.annotation.PostConstruct;
@@ -30,19 +30,19 @@ public class AvaliacaoBean implements Serializable {
 	private static final long serialVersionUID = -860487912181614461L;
 
 	@Inject
-	private VagaService vagaService;
+	private VagaServiceK vagaService;
 
 	@Inject
-	private AvaliacaoService avaliacaoService;
+	private AvaliacaoServiceK avaliacaoService;
 
 	@Inject
 	private SessionBean usuario;
 
 	@Inject
-	private CandidatoService candidatoService;
+	private CandidatoServiceK candidatoService;
 
 	@Inject
-	private UsuarioService usuarioService;
+	private UsuarioServiceK usuarioService;
 
 	private Avaliacao avaliacao;
 	private List<Avaliacao> avaliacoes;

@@ -1,4 +1,4 @@
-package kontroller
+package dao
 
 import org.hibernate.Session
 import util.jpa.Transactional

@@ -1,8 +1,7 @@
 package controller;
 
 import model.Competencia;
-import service.CompetenciaService;
-import service.VagaService;
+import service.CompetenciaServiceK;
 import service.exception.ServiceException;
 import util.MessageUtil;
 import util.Util;
@@ -24,7 +23,7 @@ public class CompetenciaBean implements Serializable {
 //    private VagaService service;
 
     @Inject
-    private CompetenciaService service;
+    private CompetenciaServiceK service;
 
 
 

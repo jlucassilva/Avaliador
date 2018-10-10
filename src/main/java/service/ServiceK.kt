@@ -1,4 +1,4 @@
-package kontroller
+package service
 
 import service.exception.ServiceException
 

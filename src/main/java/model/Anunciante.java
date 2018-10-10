@@ -1,6 +1,5 @@
 package model;
 
-import kontroller.Usuario;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

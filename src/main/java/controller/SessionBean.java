@@ -1,6 +1,6 @@
 package controller;
 
-import kontroller.Usuario;
+import model.Usuario;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;

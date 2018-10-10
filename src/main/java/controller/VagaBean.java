@@ -2,11 +2,9 @@ package controller;
 
 import model.Job;
 import model.Vaga;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.TextNode;
-import org.primefaces.PrimeFaces;
 import service.JobService;
-import service.VagaService;
+import service.VagaServiceK;
 import service.exception.ServiceException;
 import util.MessageUtil;
 import util.Util;
@@ -26,7 +24,7 @@ public class VagaBean implements Serializable {
 	private static final long serialVersionUID = -1696903758790487986L;
 
 	@Inject
-	private VagaService service;
+	private VagaServiceK service;
 
 	@Inject
 	private JobService jobService;
