@@ -12,11 +12,11 @@ import javax.inject.Named
 
 @Named
 @SessionScoped
-class SessionBeanK : Serializable {
+class SessionBean : Serializable {
     val serialVersionUID = -8298181986140423432L
 
     @Inject
-    private var usuarioLogado: Usuario? = null
+    var usuarioLogado: Usuario? = null
 
 
     @PostConstruct

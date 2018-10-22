@@ -63,7 +63,7 @@
                                         value="#{usuarioBean.competenciasSelecionadas}"
                                         label="#{usuarioBean.competenciasSelecionadas}"
                                         completeMethod="#{usuarioBean.completaCompetencias}"
-                                        var="comp" itemLabel="#{comp}" itemValue="#{comp}"
+                                        var="comp" itemLabel="#{comp.descricao}" itemValue="#{comp}"
                                         disabled="#{usuarioBean.anunciante}"
                                         forceSelection="true">
                             <p:ajax event="itemSelect"/>
