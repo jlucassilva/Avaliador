@@ -25,7 +25,6 @@ class AvaliacaoBean : Serializable {
 
     var avaliacao: Avaliacao = Avaliacao()
     var avaliacoes: List<Avaliacao> = ArrayList()
-    var vagasRecomendadas: List<Vaga> = ArrayList()
     var avaliacoesFiltradas: List<Avaliacao> = ArrayList()
 
     private var usuario: SessionBean
@@ -71,6 +70,7 @@ class AvaliacaoBean : Serializable {
     private fun carregaAvaliacoes() {
         val candidato = usuario.usuarioLogado?.candidato
         avaliacoes = ArrayList(avaliacaoService.listarTodasDe(candidato!!))
+        avaliacoesFiltradas = avaliacoes
         filtraAvaliacoes(candidato)
     }
 
@@ -98,12 +98,13 @@ class AvaliacaoBean : Serializable {
         temp.addAll(porCompetencia)
         avaliacoes = temp.toList()
 
+        avaliacoesFiltradas = avaliacoes
 
     }
 
     private fun encontraRecomendacoes(): List<Avaliacao> {
         val principal = usuario.usuarioLogado?.candidato
-        principal!!.avaliacoes = avaliacaoService.listarTodasDe(principal )
+        principal!!.avaliacoes = avaliacaoService.listarTodasDe(principal)
         val outrosCandidatos = ArrayList<Candidato>()
 
         candidatoService.listarTodos().forEach { candidato ->
@@ -119,7 +120,7 @@ class AvaliacaoBean : Serializable {
         return ranking
                 .asSequence()
                 .filter { rankVaga -> rankVaga.similaridade > 3.0 }
-                .map { rankVaga -> Avaliacao(rankVaga.item!!, principal , rankVaga.similaridade, true) }
+                .map { rankVaga -> Avaliacao(rankVaga.item!!, principal, rankVaga.similaridade, true) }
                 .toList()
 
     }

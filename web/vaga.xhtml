@@ -13,6 +13,9 @@
                     <div class="ui-g-12">
                         <div class="card">
                             <h1>Vaga</h1>
+                            <p:commandButton id="btn-add" styleClass="editor-parametro"
+                                             title="Nova Vaga" update="dialog"
+                                             action="#{vagaBean.iniciaCadastro()}"/>
                             <p:dataTable id="tabela" value="#{vagaBean.vagas}"
                                          var="vaga" widgetVar="tableVaga" lazy="false" filterBy="#{vaga.descricao}"
                                          filteredValue="#{vagaBean.vagaFiltrada}"
@@ -27,7 +30,7 @@
                                                      style="width:150px;" placeholder="Enter keyword"/>
                                     </p:outputPanel>
                                 </f:facet>
-                                
+
                                 <p:column headerText="Descricao" filterBy="#{vaga.descricao}"
                                           filterStyle="display: none">
                                     <p:inputTextarea readonly="true" rows="10" cols="40" id="dsce"
@@ -46,10 +49,7 @@
                                     </p:commandLink>
 
                                 </p:column>
-
-
                             </p:dataTable>
-
 
                         </div>
                     </div>

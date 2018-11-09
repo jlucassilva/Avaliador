@@ -18,23 +18,15 @@ class CompetenciaBean : Serializable {
     @Inject
     private var service: CompetenciaServiceK? = null
 
+    var competencias: List<Competencia> = ArrayList()
 
-    var competencias: List<Competencia>? = null
-        get() {
-            if (field == null) {
-                atualizarCompetencias()
-            }
-            return field
-        }
+    var competencia: Competencia = Competencia()
 
-    var competencia: Competencia? = null
-
-    var tituloModal: String? = null
+    var tituloModal: String = ""
 
     @PostConstruct
     fun init() {
-        tituloModal = ""
-        competencia = Competencia()
+        atualizarCompetencias()
     }
 
     private fun atualizarCompetencias() {
@@ -48,30 +40,18 @@ class CompetenciaBean : Serializable {
 
     fun iniciaAtualizacao() {
         tituloModal = "Atualização de Competencia"
-        competencia = Competencia(competencia!!)
+        competencia = Competencia(competencia)
     }
 
     fun salvar() {
         try {
-            service!!.atualizar(competencia!!)
+            service!!.atualizar(competencia)
             atualizarCompetencias()
             Util.executaJS("PF('dialog').hide();")
             MessageUtil.addErrorMessage("Competencia salvo com sucesso!")
         } catch (e: ServiceException) {
             e.printStackTrace()
-            MessageUtil.addErrorMessage(e.message)
-        }
-
-    }
-
-    fun excluir() {
-        try {
-            service!!.deletar(competencia!!.id)
-            atualizarCompetencias()
-            MessageUtil.addErrorMessage("Competencia excluido com sucesso!")
-        } catch (e: ServiceException) {
-            e.printStackTrace()
-            MessageUtil.addErrorMessage("Não é possivel deletar este item.")
+            MessageUtil.addErrorMessage(e.message!!)
         }
 
     }
@@ -79,4 +59,4 @@ class CompetenciaBean : Serializable {
     companion object {
         private const val serialVersionUID = -1696903758790487986L
     }
- }
+}

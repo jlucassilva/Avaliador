@@ -13,12 +13,6 @@ abstract class AbstractDaoK<T>(persistentClass: Class<T>) : DaoK<T> {
 
     private var entity: Class<T> = persistentClass
 
-    init {
-        val genericClass = javaClass.genericSuperclass as Class<*>
-        val parameterized = genericClass.genericSuperclass as ParameterizedType
-        entity = parameterized.actualTypeArguments[0] as Class<T>
-    }
-
     override fun getEntityManager(): EntityManager {
         return this.manager!!
     }

@@ -24,8 +24,6 @@ import kotlin.streams.toList
 class UsuarioBean : Serializable {
 
     @Inject
-    private var usuarioService: UsuarioServiceK? = null
-    @Inject
     private var candidatoService: CandidatoServiceK? = null
     @Inject
     private var competenciaService: CompetenciaServiceK? = null

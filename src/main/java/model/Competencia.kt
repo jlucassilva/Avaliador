@@ -8,7 +8,6 @@ import kotlin.jvm.Transient
 @Entity
 class Competencia : Serializable {
     @Transient
-
     private val serialVersionUID = -2449149862024727141L
 
     @Id
