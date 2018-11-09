@@ -46,4 +46,8 @@ class Avaliacao : Serializable {
         return vaga?.id
     }
 
+    fun getNotaInt(): Int {
+        return nota.toInt()
+    }
+
 }
