@@ -3,11 +3,10 @@ package controller
 import intelligence.RankPorVaga
 import model.Avaliacao
 import model.Candidato
-import model.Vaga
-import service.AvaliacaoServiceK
-import service.CandidatoServiceK
-import service.UsuarioServiceK
-import service.VagaServiceK
+import service.AvaliacaoService
+import service.CandidatoService
+import service.UsuarioService
+import service.VagaService
 import service.exception.ServiceException
 import java.io.IOException
 import java.io.Serializable
@@ -28,18 +27,18 @@ class AvaliacaoBean : Serializable {
     var avaliacoesFiltradas: List<Avaliacao> = ArrayList()
 
     private var usuario: SessionBean
-    private var vagaService: VagaServiceK
-    private var usuarioService: UsuarioServiceK
-    private var avaliacaoService: AvaliacaoServiceK
-    private var candidatoService: CandidatoServiceK
+    private var vagaService: VagaService
+    private var usuarioService: UsuarioService
+    private var avaliacaoService: AvaliacaoService
+    private var candidatoService: CandidatoService
 
     @Inject
-    constructor(vagaService: VagaServiceK, avaliacaoService: AvaliacaoServiceK, usuario: SessionBean, candidatoService: CandidatoServiceK, usuarioService: UsuarioServiceK) {
-        this.vagaService = vagaService
-        this.avaliacaoService = avaliacaoService
+    constructor(vagaService: VagaService, avaliacaoService: AvaliacaoService, usuario: SessionBean, candidatoService: CandidatoService, usuarioService: UsuarioService) {
         this.usuario = usuario
-        this.candidatoService = candidatoService
+        this.vagaService = vagaService
         this.usuarioService = usuarioService
+        this.avaliacaoService = avaliacaoService
+        this.candidatoService = candidatoService
     }
 
     @PostConstruct
@@ -127,8 +126,7 @@ class AvaliacaoBean : Serializable {
 
     fun avaliando(ava: Avaliacao) {
         try {
-            if (ava.recomendada)
-                ava.recomendada = false
+            if (ava.recomendada) ava.recomendada = false
             avaliacaoService.atualizar(ava)
         } catch (e: ServiceException) {
             e.printStackTrace()

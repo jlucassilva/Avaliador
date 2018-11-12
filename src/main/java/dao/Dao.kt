@@ -3,7 +3,7 @@ package dao
 import org.hibernate.Session
 import javax.persistence.EntityManager
 
-interface DaoK <T> {
+interface Dao <T> {
     fun getEntityManager(): EntityManager
 
     fun getSession(): Session
@@ -15,7 +15,4 @@ interface DaoK <T> {
     fun atualizar(entity: T): T
 
     fun encontraPeloId(entity: T): T
-
-    fun deletar(id: Long?)
-
 }

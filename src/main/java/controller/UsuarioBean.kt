@@ -4,10 +4,9 @@ import model.Anunciante
 import model.Candidato
 import model.Competencia
 import model.Usuario
-import service.AnuncianteServiceK
-import service.CandidatoServiceK
-import service.CompetenciaServiceK
-import service.UsuarioServiceK
+import service.AnuncianteService
+import service.CandidatoService
+import service.CompetenciaService
 import service.exception.ServiceException
 import java.io.IOException
 import java.io.Serializable
@@ -24,11 +23,11 @@ import kotlin.streams.toList
 class UsuarioBean : Serializable {
 
     @Inject
-    private var candidatoService: CandidatoServiceK? = null
+    private var candidatoService: CandidatoService? = null
     @Inject
-    private var competenciaService: CompetenciaServiceK? = null
+    private var competenciaService: CompetenciaService? = null
     @Inject
-    private var anuncianteService: AnuncianteServiceK? = null
+    private var anuncianteService: AnuncianteService? = null
 
     var usuarioSelecionado: Usuario? = null
     var usuarios: List<Usuario>? = null

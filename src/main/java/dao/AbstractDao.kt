@@ -2,50 +2,44 @@ package dao
 
 import org.hibernate.Session
 import util.jpa.Transactional
-import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 import javax.persistence.EntityManager
 
-abstract class AbstractDaoK<T>(persistentClass: Class<T>) : DaoK<T> {
+abstract class AbstractDao<T>(persistentClass: Class<T>) : Dao<T> {
 
     @Inject
-    var manager: EntityManager? = null
+    lateinit var manager: EntityManager
 
     private var entity: Class<T> = persistentClass
 
     override fun getEntityManager(): EntityManager {
-        return this.manager!!
+        return this.manager
     }
 
     override fun getSession(): Session {
-        return manager?.delegate  as Session
+        return manager.delegate as Session
     }
 
     override fun listarTodos(): List<T> {
-        return manager?.createQuery("from " + entity.simpleName, entity)?.resultList as List<T>
+        return manager.createQuery("from " + entity.simpleName, entity)?.resultList as List<T>
     }
 
     @Transactional
     override fun salvar(entity: T): T {
         var newEntity = entity
-        manager?.persist(entity)
-        newEntity = manager?.merge(newEntity)!!
+        manager.persist(entity)
+        newEntity = manager.merge(newEntity)!!
 
         return newEntity
     }
 
     @Transactional
     override fun atualizar(entity: T): T {
-        return manager?.merge(entity)!!
+        return manager.merge(entity)!!
     }
 
     @Transactional
     override fun encontraPeloId(entity: T): T {
-        return manager?.find(this.entity, entity)!!
+        return manager.find(this.entity, entity)!!
     }
-
-    override fun deletar(id: Long?) {
-        manager?.remove(id)!!
-    }
-
 }

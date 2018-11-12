@@ -29,13 +29,13 @@
                 <div class="ui-g ui-fluid">
                     <div class="ui-g-12">
                         <p:inputText id="login" placeholder="Nome de usuario"
-                                     value="#{loginBeanK.username}" required="true"
+                                     value="#{loginBean.username}" required="true"
                                      requiredMessage="Email ou usuario é obrigatorio"/>
                     </div>
 
                     <div class="ui-g-12">
                         <p:password id="password" placeholder="Senha"
-                                    value="#{loginBeanK.password}"
+                                    value="#{loginBean.password}"
                                     required="true" requiredMessage="A senha é obrigatoria"/>
                     </div>
                     <div class="ui-g-12 ui-md-6">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="ui-g-12">
                         <p:commandButton value="Login" icon="fa fa-check"
-                                         update="form" actionListener="#{loginBeanK.login}"/>
+                                         update="form" actionListener="#{loginBean.login}"/>
                     </div>
                 </div>
             </div>

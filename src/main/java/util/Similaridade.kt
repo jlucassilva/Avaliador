@@ -30,7 +30,6 @@ object Similaridade {
         val den = 1.0 * den1 * den2
 
         return if (den == 0.0) 0.0 else pearsonScore / den
-
     }
 
     private fun obterSomaDasNotas(avaliacoes: Set<Avaliacao>): Double {

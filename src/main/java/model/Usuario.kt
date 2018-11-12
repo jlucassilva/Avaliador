@@ -3,13 +3,9 @@ package model
 import org.hibernate.annotations.GenericGenerator
 import java.io.Serializable
 import javax.persistence.*
-import kotlin.jvm.Transient
 
 @Entity
 class Usuario : Serializable {
-    @Transient
-    private val serialVersionUID = 8511735530142157411L
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")

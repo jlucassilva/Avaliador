@@ -25,7 +25,7 @@ class RankPorCandidatoTest {
 
         val seymour = Candidatos.Seymour.candidato
         seymour.avaliacoes = encontraAvaliacoesDe(seymour)
-        assertEquals(seymour.avaliacoes.size.toLong(), 6)
+        assertEquals(6,seymour.avaliacoes.size)
     }
 
     @Test

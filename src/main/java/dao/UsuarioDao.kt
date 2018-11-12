@@ -3,7 +3,7 @@ package dao
  import model.Usuario
  import java.io.Serializable
 
-open class UsuarioDaoK: AbstractDaoK<Usuario>(Usuario::class.java),Serializable {
+open class UsuarioDao: AbstractDao<Usuario>(Usuario::class.java),Serializable {
 
     fun findUserWith(username: String, password: String): Usuario? {
         return getEntityManager().createQuery("select u from Usuario u" +

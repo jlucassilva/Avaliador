@@ -7,13 +7,11 @@ import kotlin.jvm.Transient
 
 @Entity
 class Competencia : Serializable {
-    @Transient
-    private val serialVersionUID = -2449149862024727141L
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    var id: Long? = null
+    var id: Long = 0
     @Column
     var descricao: String = ""
 

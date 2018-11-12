@@ -1,14 +1,12 @@
 package service
 
-import dao.AvaliacaoDaoK
-import dao.UsuarioDaoK
+import dao.AvaliacaoDao
 import model.Avaliacao
 import model.Candidato
-import model.Usuario
 import java.io.Serializable
 import javax.inject.Inject
 
-class AvaliacaoServiceK @Inject constructor(var daoU: AvaliacaoDaoK) : Serializable, ServiceAbstractK<Avaliacao>(dao = daoU) {
+class AvaliacaoService @Inject constructor(var daoU: AvaliacaoDao) : Serializable, AbstractService<Avaliacao>(dao = daoU) {
 
     val serialVersionUID = -2800411759544395063L
 

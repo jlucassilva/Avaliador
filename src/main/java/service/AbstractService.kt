@@ -1,9 +1,9 @@
 package service
 
-import dao.DaoK
+import dao.Dao
 import service.exception.ServiceException
 
-abstract class ServiceAbstractK<T>(var dao: DaoK<T>) : ServiceK<T> {
+abstract class AbstractService<T>(var dao: Dao<T>) : Service<T> {
 
     override fun listarTodos(): List<T> {
         return dao.listarTodos()
@@ -24,8 +24,4 @@ abstract class ServiceAbstractK<T>(var dao: DaoK<T>) : ServiceK<T> {
         return dao.encontraPeloId(entity)
     }
 
-    @Throws(ServiceException::class)
-    override fun deletar(id: Long?) {
-        dao.deletar(id)
-    }
 }

@@ -1,7 +1,7 @@
 package controller
 
 import model.Competencia
-import service.CompetenciaServiceK
+import service.CompetenciaService
 import service.exception.ServiceException
 import util.MessageUtil
 import util.Util
@@ -16,13 +16,13 @@ import javax.inject.Named
 class CompetenciaBean : Serializable {
 
     @Inject
-    private var service: CompetenciaServiceK? = null
+    private lateinit var service: CompetenciaService
 
     var competencias: List<Competencia> = ArrayList()
-
     var competencia: Competencia = Competencia()
-
     var tituloModal: String = ""
+    @Inject
+    private var servicea: CompetenciaService? = null
 
     @PostConstruct
     fun init() {
@@ -30,7 +30,7 @@ class CompetenciaBean : Serializable {
     }
 
     private fun atualizarCompetencias() {
-        this.competencias = service!!.listarTodos()
+        competencias = service.listarTodos()
     }
 
     fun iniciaCadastro() {
@@ -45,7 +45,7 @@ class CompetenciaBean : Serializable {
 
     fun salvar() {
         try {
-            service!!.atualizar(competencia)
+            service.atualizar(competencia)
             atualizarCompetencias()
             Util.executaJS("PF('dialog').hide();")
             MessageUtil.addErrorMessage("Competencia salvo com sucesso!")
@@ -53,7 +53,6 @@ class CompetenciaBean : Serializable {
             e.printStackTrace()
             MessageUtil.addErrorMessage(e.message!!)
         }
-
     }
 
     companion object {

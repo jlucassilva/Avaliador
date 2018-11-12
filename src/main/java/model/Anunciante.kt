@@ -7,10 +7,6 @@ import javax.persistence.*
 @Entity
 class Anunciante : Serializable {
 
-    @Transient
-    private val serialVersionUID = 5911361446123528715L
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")

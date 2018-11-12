@@ -1,6 +1,6 @@
 package controller
 
-import service.UsuarioServiceK
+import service.UsuarioService
 import util.MessageUtil
 import java.io.IOException
 import java.io.Serializable
@@ -11,11 +11,11 @@ import javax.inject.Named
 
 @Named
 @ViewScoped
-class LoginBeanK : Serializable {
+class LoginBean : Serializable {
     val serialVersionUID = 501635185433949249L
 
     @Inject
-    private var usuarioServiceK: UsuarioServiceK? = null
+    private var usuarioServiceK: UsuarioService? = null
 
     @Inject
     private var session: SessionBean? = null

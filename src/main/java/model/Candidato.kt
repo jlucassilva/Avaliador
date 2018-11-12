@@ -9,10 +9,6 @@ import javax.persistence.*
 @Entity
 class Candidato : Serializable {
 
-    @Transient
-    private val serialVersionUID = 591136117864928715L
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")

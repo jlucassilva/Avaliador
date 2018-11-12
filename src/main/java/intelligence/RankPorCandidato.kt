@@ -3,16 +3,8 @@ package intelligence
 import model.Candidato
 import util.Similaridade
 
-class RankPorCandidato {
-    var item: Candidato? = null
-    var similaridade: Double = 0.toDouble()
-
-    constructor()
-
-    constructor(item: Candidato, similaridade: Double) {
-        this.item = item
-        this.similaridade = similaridade
-    }
+class RankPorCandidato(item: Candidato, var similaridade: Double) {
+    var item: Candidato? = item
 
     companion object {
         fun comparaTodosCom(principal: Candidato, outrosCandidatos: MutableList<Candidato>): List<RankPorCandidato> {

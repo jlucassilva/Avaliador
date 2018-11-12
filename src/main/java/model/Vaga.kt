@@ -12,9 +12,6 @@ import kotlin.jvm.Transient
 @Entity
 class Vaga : Serializable {
 
-    @Transient
-    private val serialVersionUID = 2739927316231062403L
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")

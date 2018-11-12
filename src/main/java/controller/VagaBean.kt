@@ -1,5 +1,5 @@
 import model.Vaga
-import service.VagaServiceK
+import service.VagaService
 import service.exception.ServiceException
 import util.MessageUtil
 import util.Util
@@ -16,7 +16,7 @@ import javax.inject.Named
 class VagaBean : Serializable {
 
     @Inject
-    private var service: VagaServiceK? = null
+    private var service: VagaService? = null
 
     var vagas: List<Vaga> = ArrayList()
     var vagaFiltrada: List<Vaga> = ArrayList()
