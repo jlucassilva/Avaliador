@@ -6,23 +6,12 @@
 
     <persistence-unit name="hsqldb">
         <!-- provedor/implementacao do JPA -->
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
         <properties>
-            <!-- dados da conexao -->
-            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-            <property name="javax.persistence.jdbc.url"
-                      value="jdbc:hsqldb:file:C:/banco/avalia;hsqldb.lock_file=false"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="admin"/>
-
-            <!--  propriedades do hibernate -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-            <property name="hibernate.show_sql" value="false"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <!--  atualiza o banco, gera as tabelas se for preciso -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:h2:mem:default"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
 
