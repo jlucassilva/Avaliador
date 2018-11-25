@@ -28,7 +28,7 @@ abstract class AbstractDao<T>(persistentClass: Class<T>) : Dao<T> {
     override fun salvar(entity: T): T {
         var newEntity = entity
         manager.persist(entity)
-        newEntity = manager.merge(newEntity)!!
+        newEntity = manager.merge(newEntity)
 
         return newEntity
     }

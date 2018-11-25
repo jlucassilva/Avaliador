@@ -9,7 +9,7 @@ class Usuario : Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    var id: Long? = null
+    var id: Long = 0
 
     @Column(unique = true)
     var username: String = ""

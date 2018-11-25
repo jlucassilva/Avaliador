@@ -12,9 +12,9 @@ class Candidato : Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    var id: Long? = null
+    var id: Long = 0L
 
-    var nome: String? = null
+    var nome: String = ""
 
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
     var usuario: Usuario? = null
@@ -24,7 +24,7 @@ class Candidato : Serializable {
     var competencias: List<Competencia> = ArrayList()
 
     @OneToMany(fetch = FetchType.EAGER)
-    var avaliacoes: Set<Avaliacao>  = HashSet()
+    var avaliacoes: Set<Avaliacao> = emptySet()
 
     constructor()
 
@@ -32,12 +32,12 @@ class Candidato : Serializable {
         this.nome = nome
     }
 
-    constructor(id: Long?, nome: String) {
+    constructor(id: Long, nome: String) {
         this.nome = nome
         this.id = id
     }
 
-    constructor(id: Long?, nome: String, avaliacoes: Set<Avaliacao>) {
+    constructor(id: Long, nome: String, avaliacoes: Set<Avaliacao>) {
         this.id = id
         this.nome = nome
         this.avaliacoes = avaliacoes
@@ -56,8 +56,8 @@ class Candidato : Serializable {
     }
 
     override fun hashCode(): Int {
-        var result = id?.hashCode() ?: 0
-        result = 31 * result + (nome?.hashCode() ?: 0)
+        var result = id.hashCode()
+        result = 31 * result + nome.hashCode()
         return result
     }
 

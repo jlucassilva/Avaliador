@@ -3,7 +3,6 @@ package model
 import org.hibernate.annotations.GenericGenerator
 import java.io.Serializable
 import javax.persistence.*
-import kotlin.jvm.Transient
 
 @Entity
 class Competencia : Serializable {
@@ -11,7 +10,7 @@ class Competencia : Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    var id: Long = 0
+    var id: Long = 0L
     @Column
     var descricao: String = ""
 

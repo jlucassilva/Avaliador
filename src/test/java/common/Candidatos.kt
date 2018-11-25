@@ -2,7 +2,7 @@ package common
 
 import model.Candidato
 
-enum class Candidatos constructor(private val id: Long?, val nome: String, candidato: Candidato) {
+enum class Candidatos constructor(private val id: Long , val nome: String, candidato: Candidato) {
 
     Rose(1L, "Lisa Rose", Candidato()),
     Seymour(2L, "Gene Seymour", Candidato()),

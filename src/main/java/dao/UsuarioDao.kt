@@ -1,12 +1,12 @@
 package dao
 
- import model.Usuario
- import java.io.Serializable
- import javax.persistence.NoResultException
- import javax.persistence.TypedQuery
+import model.Usuario
+import java.io.Serializable
+import javax.persistence.NoResultException
+import javax.persistence.TypedQuery
 
-open class UsuarioDao: AbstractDao<Usuario>(Usuario::class.java),Serializable {
-    
+open class UsuarioDao : AbstractDao<Usuario>(Usuario::class.java), Serializable {
+
     fun findUserWith(username: String, password: String): Usuario {
         return getEntityManager().createQuery("select u from Usuario u" +
                 " where u.username = :username" +
@@ -16,11 +16,12 @@ open class UsuarioDao: AbstractDao<Usuario>(Usuario::class.java),Serializable {
                 .safeSingleResult()
     }
 
-   fun TypedQuery<Usuario>.safeSingleResult(): model.Usuario {
+    fun TypedQuery<Usuario>.safeSingleResult(): model.Usuario {
         return try {
             this.singleResult
         } catch (e: NoResultException) {
             e.printStackTrace()
             Usuario()
         }
-    }}
+    }
+}
