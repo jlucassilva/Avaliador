@@ -12,6 +12,4 @@ public interface Service<T> {
     T atualizar(T entity) throws ServiceException;
 
     T encontraPeloId(T entity) throws ServiceException;
-
-    void deletar(Long id) throws ServiceException;
 }

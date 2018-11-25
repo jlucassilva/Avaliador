@@ -1,9 +1,7 @@
 package service;
 
 import dao.AnuncianteDao;
-import dao.CompetenciaDao;
 import model.Anunciante;
-import model.Competencia;
 
 import javax.inject.Inject;
 import java.io.Serializable;

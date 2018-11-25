@@ -1,12 +1,9 @@
 package controller;
 
-import model.Competencia;
 import model.Usuario;
-import model.Vaga;
 import service.CompetenciaService;
 import service.UsuarioService;
 import service.VagaService;
-import service.exception.ServiceException;
 import util.MessageUtil;
 
 import javax.faces.context.ExternalContext;
@@ -16,9 +13,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
@@ -66,37 +60,5 @@ public class LoginBean implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-//	public void teste() throws ServiceException {
-//		List<Vaga> vagas = vagaService.listarTodos();
-//		List<Competencia> competencias = competenciaService.listarTodos();
-//
-//		for (Competencia comp : competencias) {
-//			if (comp.getDescricao() == "Java") {
-//				List<Vaga> vagas1 = vagas.stream().filter(vaga -> vaga.getDescricao().toLowerCase().contains("java")).collect(Collectors.toList());
-//
-//				if (vagas1.size() >= 200) {
-//					for (int i = 0; i < 20; i++) {
-//						Vaga vaga = vagas1.get(i);
-//						List<Competencia> comps = new ArrayList<>();
-//						comps.add(comp);
-//						vaga.setCompetencias(comps);
-//
-//						vagaService.atualizar(vaga);
-//					}
-//				} else {
-//					for (int i = 0; i < vagas1.size(); i++) {
-//						Vaga vaga = vagas1.get(i);
-//						List<Competencia> comps = new ArrayList<>();
-//						comps.add(comp);
-//						vaga.setCompetencias(comps);
-//
-//						vagaService.atualizar(vaga);
-//					}
-//				}
-//
-//			}
-//		}
-//	}
 }
 

@@ -9,7 +9,6 @@ import service.CandidatoService;
 import service.CompetenciaService;
 import service.UsuarioService;
 import service.exception.ServiceException;
-import util.Util;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;

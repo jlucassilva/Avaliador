@@ -3,7 +3,6 @@ package service;
 import dao.VagaDao;
 import model.Candidato;
 import model.Vaga;
-import service.ServiceAbstract;
 
 import javax.inject.Inject;
 import java.io.Serializable;

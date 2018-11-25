@@ -1,25 +1,18 @@
 package model;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
 
 @Entity
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 8511735530142157411L;
 	@Id
-	@GeneratedValue(
-			strategy = GenerationType.AUTO,
-			generator = "native")
-	@GenericGenerator(
-			name = "native",
-			strategy = "native")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
-
 	@Column(unique = true)
 	private String username;
 	@Column

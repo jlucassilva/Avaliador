@@ -5,7 +5,6 @@ import model.Candidato;
 
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.List;
 
 public class CandidatoService extends ServiceAbstract<Candidato> implements Serializable {
 
@@ -16,10 +15,6 @@ public class CandidatoService extends ServiceAbstract<Candidato> implements Seri
 	public CandidatoService(CandidatoDao dao) {
 		super(dao);
 		this.dao = dao;
-	}
-
-	public List<Candidato> listarTodosOsCandidatos() {
-		return dao.listarTodosComAvaliacoes();
 	}
 
 }

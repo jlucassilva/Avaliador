@@ -1,6 +1,5 @@
 package dao;
 
-import org.hibernate.Session;
 import util.jpa.Transactional;
 
 import javax.inject.Inject;
@@ -15,7 +14,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 	private EntityManager manager;
 
 	@SuppressWarnings("unchecked")
-	public AbstractDao() {
+	AbstractDao() {
 		Class<T> genericClass = (Class<T>) getClass().getGenericSuperclass();
 		ParameterizedType parameterized = (ParameterizedType) genericClass.getGenericSuperclass();
 		entity = (Class<T>) parameterized.getActualTypeArguments()[0];
@@ -33,11 +32,6 @@ public abstract class AbstractDao<T> implements Dao<T> {
 	@Override
 	public EntityManager getEntityManager() {
 		return this.manager;
-	}
-
-	@Override
-	public Session getSession() {
-		return (Session) manager.getDelegate();
 	}
 
 	@Override
@@ -67,8 +61,4 @@ public abstract class AbstractDao<T> implements Dao<T> {
 		return manager.find(this.entity, entity);
 	}
 
-	@Override
-	public void deletar(Long id) {
-		manager.remove(id);
-	}
 }

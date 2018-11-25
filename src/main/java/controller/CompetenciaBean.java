@@ -2,7 +2,6 @@ package controller;
 
 import model.Competencia;
 import service.CompetenciaService;
-import service.VagaService;
 import service.exception.ServiceException;
 import util.MessageUtil;
 import util.Util;
@@ -19,14 +18,8 @@ import java.util.List;
 public class CompetenciaBean implements Serializable {
     private static final long serialVersionUID = -1696903758790487986L;
 
-
-//    @Inject
-//    private VagaService service;
-
     @Inject
     private CompetenciaService service;
-
-
 
 	private List<Competencia> competencias;
 
@@ -66,18 +59,7 @@ public class CompetenciaBean implements Serializable {
         }
     }
 
-    public void excluir() {
-        try {
-            service.deletar(competencia.getId());
-            atualizarCompetencias();
-            MessageUtil.addErrorMessage("Competencia excluido com sucesso!");
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            MessageUtil.addErrorMessage("Não é possivel deletar este item.");
-        }
-    }
-
-    public List<Competencia> getCompetencias() {
+	public List<Competencia> getCompetencias() {
         if (competencias == null) {
             atualizarCompetencias();
         }
@@ -104,5 +86,4 @@ public class CompetenciaBean implements Serializable {
         this.tituloModal = tituloModal;
     }
 
-//	private String
-}
+ }
